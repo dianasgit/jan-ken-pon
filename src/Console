@@ -1,0 +1,8 @@
+public record Console(
+    Player user,
+    Player IA,
+    int rounds
+){
+
+    
+}
