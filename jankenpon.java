@@ -1,17 +1,88 @@
-// ************* RULES OF JUN KEN PON ******************* 
-// 1 == ROCK ; 2 == PAPER ; 3 == SCISSORS
-// PLAYERS: user vs. IA
-// If user choose 1 and IA choose 1, then: TIE == SUB 0
-// If user choose 1 and IA choose 2, then: IA WIN == SUB -1
-// If user choose 1 and IA choose 3, then: user WIN == SUB -2
-// If user choose 2 and IA choose 1, then: user WIN == SUB 1
-// If user choose 2 and IA choose 2, then: TIE == SUB 0
-// If user choose 2 and IA choose 3, then: IA WIN == SUB -1
-// If user choose 3 and IA choose 1, then: IA WIN == SUB 2
-// If user choose 3 and IA choose 2, then: user WIN == SUB 1
-// If user choose 3 and IA choose 3, then: TIE == SUB 0
-// then user WIN if SUB == -2 or 1 
-// and then IA WIN if SUB == -1 or 2
-// if SUB == O then is a TIE.
+import random
+
+def validate(hand):
+    if hand < 0 or hand > 2:
+        return False
+    else:
+        return True
+
+def handshape(hand, name):
+    hands = ['Rock', 'Paper', 'Scissors']
+    print(name + ' picked: ' + hands[hand])
+
+def battle(player, computer):
+    if player == computer:
+        return 'Draw'
+    elif player == 0 and computer == 1:
+        return 'You Lose...'
+    elif player == 1 and computer == 2:
+        return 'You Lose...'
+    elif player == 2 and computer == 0:
+        return 'You Lose...'
+    else:
+        return 'You Win!!'
 
 
+def main():
+    print(
+    """
+    \n \U0000270A \U0001F590 \U0000270C ====== WELCOME TO JANKENPON GAME ====== \U0000270C \U0001F590 \U0000270A
+    """)
+    player_name = input('Please enter your name: ')
+
+    def startgame():
+        print('\nPick a hand: (0: Rock, 1: Paper, 2: Scissors)')
+
+    player_handshape = None
+    while True:
+        try:
+            player_handshape = int(input('Please enter a number (0-2): '))
+        except ValueError:
+            print('Please input valid number')
+            continue
+        else:
+            break
+
+    if validate(player_handshape):
+        computer_handshape = random.randint(0, 2)
+        print('\n')
+        handshape(player_handshape, player_name)
+        handshape(computer_handshape, 'Computer')
+        result = battle(player_handshape, computer_handshape)
+        print('\nResult: ' + result)
+
+    else:
+        while True:
+            print("Please input valid number")
+            while True:
+                try:
+                    player_handshape = int(input('Please enter a number (0-2): '))
+                except ValueError:
+                    print('Please input valid number')
+                    continue
+                else:
+                    break
+            if validate(player_handshape):
+                computer_handshape = random.randint(0, 2)
+                print('\n')
+                handshape(player_handshape, player_name)
+                handshape(computer_handshape, 'Computer')
+                result = battle(player_handshape, computer_handshape)
+                print('\nResult: ' + result)
+                break
+
+if __name__ == '__main__':
+    main()
+
+while True:
+    while True:
+        again = str(input('Play again? (y/n): '))
+        if again in ('y', 'n'):
+            break
+        print('Invalid input')
+    if again == 'y':
+        main()
+    else:
+        print('\nThank you for playing JANKENPON game!')
+        print('See you later!')
+        break
